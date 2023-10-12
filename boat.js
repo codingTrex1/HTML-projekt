@@ -1,11 +1,8 @@
 let gamma;
 
 function setup(){
-canvas.width = innerWidth
-canvas.height = innerHeight
-const canvas = document.querySelector('canvas')
-const c = canvas.getContext('2d')
-gamma = 0;
+    canvas = createCanvas(innerWidth, innerHeight)
+    gamma = 0;
 }
 
 function handleOrientation(event) {
