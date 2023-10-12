@@ -16,19 +16,23 @@ function handleOrientation(event) {
 
 function draw(){
     skib.position = gamma;
+    
+    if (collision(skib, innerWidth)){
+        skib.position.x = 0
+    }
 }
-
-
 
 //denne function skal oprette en function for collision som returnerer skibets længde
 function collision(skib){
     return(
         skib.position.x + skib.width 
     )
-}
 
+}
 //denne collision skal gøre så at hvis at innerwidth og skib kolliderer, så skal den stoppe
-if (collision(skib, innerWidth)){
-    skib.position.x = 0
+
+function onBodyLoaded() {
+    var number = gamma;
+    document.getElementById("myText").innerHTML = number;
 }
 
