@@ -2,14 +2,25 @@
 <html>
 <head>
     <link rel="stylesheet" href="Style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"
+        integrity="sha512-bcfltY+lNLlNxz38yBBm/HLaUB1gTV6I0e+fahbF9pS6roIdzUytozWdnFV8ZnM6cSAG5EbmO0ag0a/fLZSG4Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+    <script>
+        function myFunction() {
+          var number = gamma;
+          document.getElementById("myText").innerHTML = number;
+        }
+      </script>
+
 </head>
 
-
-<body>
+<body onload="myFunction()">
+<h1>Hello World</h1> 
 <div class="skib">
-    <h1>Hello World</h1>
-<img src="Piratskib.png">
+    <img src="Piratskib.png">
 </div>
+<h1>"The value for number is: " <span id="myText"></span></h1>
 </body>
 
 </html>
