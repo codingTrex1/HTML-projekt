@@ -1,35 +1,57 @@
-let gamma;
+let cx, cy;
+let permissionGranted = false;
 
 function setup(){
-    canvas = createCanvas(innerWidth, innerHeight)
-    gamma = 0;
-}
-
-function handleOrientation(event) {
-    var alpha    = event.alpha;
-    var beta     = event.beta;
-    gamma    = event.gamma;
-}
-
-function draw(){
-    skib.position = gamma;
+    canvas = createCanvas(windowWidth, WindowHeight)
     
-    if (collision(skib, innerWidth)){
-        skib.position.x = 0
+    cx = width/2;
+    cy = height/2;
+
+if (typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
+
+    DeviceOrientationEvent.requestPermission()
+    .catch(() =>{
+        let button = createButton('start');
+        button.style("font-size", "30px");
+        button.center();
+        button.mousePressed (requestAccess);
+        throw error;
+    })
+    .then(() =>{
+        permissionGranted = true;
+    })
+} else {
+    textSize(30);
+    text("det virker ikke på iphone 12 pro", 100, 100);
     }
 }
 
-//denne function skal oprette en function for collision som returnerer skibets længde
-function collision(skib){
-    return(
-        skib.position.x + skib.width 
-    )
+function requestAccess(){
+DeviceOrientationEvent.requestPermission()
+.then (response => {
+    if (response == 'granted') {
+        permissionGranted == true;
+    } else {
+        permissionGranted == false;
+    }
+    })
+    .catch(console.error);
+
+    this.remove();
+}
+
+function draw(){
+if (!permissionGranted) return;
+
+background(255);
+
+const dx = constrain(rotationX, -3, 3);
+const dy = constrain(rotationY, -3, 3);
+cx += dx;
+cy += dy;
+cx = constrain(cx, 0, width);
+cy = constrain(cy, 0, height);
+
+skib(cx, cy);
 
 }
-//denne collision skal gøre så at hvis at innerwidth og skib kolliderer, så skal den stoppe
-
-function onBodyLoaded() {
-    var number = gamma;
-    document.getElementById("myText").innerHTML = number;
-}
-
